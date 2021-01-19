@@ -61,6 +61,34 @@
           v-bind:key="schedule.id"
         ></TimelineItem>
       </v-timeline>
+      <br />
+
+      <v-divider />
+
+      <v-form>
+        <div>
+          <label for="color-picker">색상을 선택해주세요</label>
+          <v-color-picker
+            id="color-picker"
+            hide-canvas
+            hide-inputs
+            width="300px"
+          />
+        </div>
+        <br />
+        <div>
+          <label for="time-picker">시간을 선택해주세요</label>
+          <v-time-picker id="time-picker" width="300px"></v-time-picker>
+        </div>
+        <br />
+        <div>
+          <v-text-field placeholder="어떤 일정인가요?">
+            <v-icon slot="append" color="red">
+              mdi-plus
+            </v-icon></v-text-field
+          >
+        </div>
+      </v-form>
     </div>
   </div>
 </template>
@@ -70,6 +98,7 @@ import TimelineItem from "@/components/molecules/TimelineItem";
 
 export default {
   components: { TimelineItem },
+
   data() {
     return {
       schedules: [
@@ -97,6 +126,23 @@ export default {
         },
       ],
     };
+  },
+
+  method: {
+    addSchedules(color, time, title) {
+      const item = {
+        id: 0,
+        time,
+        title,
+        caption: "",
+        participants: [],
+        options: {
+          color,
+          small: true,
+        },
+      };
+      return item;
+    },
   },
 };
 </script>
