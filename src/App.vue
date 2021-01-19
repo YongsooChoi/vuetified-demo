@@ -67,7 +67,7 @@
         <v-list-item
           v-for="menu in menus"
           v-bind:key="menu.id"
-          v-bind:href="menu.path"
+          v-bind:to="menu.path"
         >
           <v-list-item-icon>
             <v-icon>mdi-folder</v-icon>
