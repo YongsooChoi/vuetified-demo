@@ -68,7 +68,7 @@
           link
           v-for="(menu, index) in menus"
           v-bind:key="index"
-          v-bind:href="menu.path"
+          v-bind:href="process.env.BASE_URL + menu.path"
         >
           <v-list-item-icon>
             <v-icon>mdi-folder</v-icon>
@@ -100,10 +100,10 @@ export default {
       email: "yongsoochoi@hnine.com",
     },
     menus: [
-      { title: "Profile", path: "/vuetiful-demo/profile" },
-      { title: "Post", path: "/vuetiful-demo/post" },
-      { title: "Board", path: "/vuetiful-demo/board" },
-      { title: "Demo", path: "/vuetiful-demo/demo" },
+      { title: "Profile", path: "/profile" },
+      { title: "Post", path: "/post" },
+      { title: "Board", path: "/board" },
+      { title: "Demo", path: "/demo" },
     ],
   }),
 

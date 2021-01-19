@@ -10,29 +10,30 @@ Vue.use(Router);
 
 export default new Router({
   mode: "history",
+  base: process.env.BASE_URL,
   routes: [
     {
-      path: "/vuetiful-demo/",
+      path: "/",
       name: "main",
       component: HelloWorld,
     },
     {
-      path: "/vuetiful-demo/profile",
+      path: "/profile",
       name: "profile",
       component: MyProfile,
     },
     {
-      path: "/vuetiful-demo/post",
+      path: "/post",
       name: "post",
       component: MyPost,
     },
     {
-      path: "/vuetiful-demo/board",
+      path: "/board",
       name: "board",
       component: MyBoard,
     },
     {
-      path: "/vuetiful-demo/demo",
+      path: "/demo",
       name: "demo",
       component: MyDemo,
     },
