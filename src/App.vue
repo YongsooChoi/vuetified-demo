@@ -64,16 +64,13 @@
       <v-divider></v-divider>
 
       <v-list nav dense>
-        <v-list-item
-          link
-          v-for="menu in menusWithBaseURL"
-          v-bind:key="menu.id"
-          v-bind:href="menu.path"
-        >
-          <v-list-item-icon>
-            <v-icon>mdi-folder</v-icon>
-          </v-list-item-icon>
-          <v-list-item-title>{{ menu.title }}</v-list-item-title>
+        <v-list-item v-for="menu in menusWithBaseURL" v-bind:key="menu.id">
+          <router-link v-bind:to="menu.path">
+            <v-list-item-icon>
+              <v-icon>mdi-folder</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>{{ menu.title }}</v-list-item-title>
+          </router-link>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
