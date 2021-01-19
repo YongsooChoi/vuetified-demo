@@ -65,7 +65,7 @@
 
       <v-list nav dense>
         <v-list-item
-          v-for="menu in menusWithBaseURL"
+          v-for="menu in menus"
           v-bind:key="menu.id"
           v-bind:to="menu.path"
         >
