@@ -64,7 +64,8 @@
       <v-divider></v-divider>
 
       <v-list nav dense>
-        <v-list-item v-for="menu in menusWithBaseURL" v-bind:key="menu.id">
+        <!-- <v-list-item v-for="menu in menusWithBaseURL" v-bind:key="menu.id"> -->
+        <v-list-item v-for="menu in menus" v-bind:key="menu.id">
           <router-link v-bind:to="menu.path">
             <v-list-item-icon>
               <v-icon>mdi-folder</v-icon>
