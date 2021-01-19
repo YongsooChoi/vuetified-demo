@@ -66,9 +66,9 @@
       <v-list nav dense>
         <v-list-item
           link
-          v-for="(menu, index) in menus"
-          v-bind:key="index"
-          v-bind:href="process.env.BASE_URL + menu.path"
+          v-for="menu in menusWithBaseURL"
+          v-bind:key="menu.id"
+          v-bind:href="menu.path"
         >
           <v-list-item-icon>
             <v-icon>mdi-folder</v-icon>
@@ -100,10 +100,10 @@ export default {
       email: "yongsoochoi@hnine.com",
     },
     menus: [
-      { title: "Profile", path: "/profile" },
-      { title: "Post", path: "/post" },
-      { title: "Board", path: "/board" },
-      { title: "Demo", path: "/demo" },
+      { id: 0, title: "Profile", path: "profile" },
+      { id: 1, title: "Post", path: "post" },
+      { id: 2, title: "Board", path: "board" },
+      { id: 3, title: "Demo", path: "demo" },
     ],
   }),
 
@@ -112,6 +112,12 @@ export default {
       return new Date(Date.now());
       // return new Date(Date.now()).toDateString();
       // return new Date(Date.now()).toLocaleDateString();
+    },
+    menusWithBaseURL() {
+      console.log(process.env.BASE_URL);
+      return this.menus.map((menu) => {
+        return { ...menu, path: process.env.BASE_URL + menu.path };
+      });
     },
   },
 };
