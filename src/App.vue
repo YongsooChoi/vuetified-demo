@@ -7,16 +7,21 @@
     </v-main>
 
     <v-footer app>last rendered: {{ getCurrentTime }}</v-footer>
+    <system-bar
+      v-bind:showSystemBar="showSystemBar"
+      v-on:closeSystemBar="() => (showSystemBar = false)"
+    />
   </v-app>
 </template>
 
 <script>
 import NavigationDrawer from "@/components/organisms/NavigationDrawer";
+import SystemBar from "@/components/organisms/SystemBar";
 
 export default {
   name: "App",
 
-  components: { NavigationDrawer },
+  components: { NavigationDrawer, SystemBar },
 
   data: () => ({
     profile: {
@@ -31,6 +36,7 @@ export default {
       // { id: 3, title: "Board", path: "board" },
       { id: 4, title: "Demo", path: "demo" },
     ],
+    showSystemBar: true,
   }),
 
   computed: {

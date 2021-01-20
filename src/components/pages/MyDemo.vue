@@ -2,7 +2,7 @@
   <div>
     <h1>Components Demonstration</h1>
     <div>
-      <h3>timeline</h3>
+      <h2>timeline</h2>
 
       <v-timeline align-top dense>
         <!-- <v-timeline-item color="pink" small>
@@ -65,6 +65,7 @@
 
       <v-divider />
 
+      <h2>일정 추가 color-picker, time-picker, v-text-field</h2>
       <v-form>
         <div>
           <label for="color-picker">색상을 선택해주세요</label>
@@ -77,14 +78,16 @@
         </div>
         <br />
         <div>
-          <label for="time-picker">시간을 선택해주세요</label>
+          <label for="time-picker">시작 시간을 선택해주세요</label>
           <v-time-picker
-            dark
+            landscape
             scrollable
+            format="24hr"
             id="time-picker"
-            v-model="schedulesToAdd.time"
+            v-model="schedulesToAdd.timeStart"
           ></v-time-picker>
         </div>
+
         <br />
         <div>
           <v-text-field
@@ -98,10 +101,102 @@
           >
         </div>
       </v-form>
-      <div v-if="showSchedulesToAdd">
+      <!-- <div v-if="showSchedulesToAdd">
         {{ schedulesToAdd }}
-      </div>
+      </div> -->
     </div>
+
+    <!-- <v-divider />
+    <div>
+      <h1>Plan your event:</h1>
+      <v-row justify="space-around" align="center">
+        <v-col style="width: 350px; flex: 0 1 auto;">
+          <h2>시작:</h2>
+          <v-time-picker
+            landscape
+            scrollable
+            format="24hr"
+            v-model="start"
+            :max="end"
+          ></v-time-picker>
+        </v-col>
+        <v-col style="width: 350px; flex: 0 1 auto;">
+          <h2>종료:</h2>
+          <v-time-picker
+            landscape
+            scrollable
+            format="24hr"
+            v-model="end"
+            :min="start"
+          ></v-time-picker>
+        </v-col>
+      </v-row>
+    </div>
+    <br /> -->
+
+    <!-- <v-divider />
+    <v-row>
+      <v-col cols="11" sm="5">
+        <v-menu
+          ref="menu"
+          v-model="menu2"
+          :close-on-content-click="false"
+          :nudge-right="40"
+          :return-value.sync="time"
+          transition="scale-transition"
+          offset-y
+          max-width="290px"
+          min-width="290px"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-text-field
+              v-model="time"
+              label="Picker in menu"
+              prepend-icon="mdi-clock-time-four-outline"
+              readonly
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </template>
+          <v-time-picker
+            v-if="menu2"
+            v-model="time"
+            full-width
+            @click:minute="$refs.menu.save(time)"
+          ></v-time-picker>
+        </v-menu>
+      </v-col>
+      <v-spacer></v-spacer>
+      <v-col cols="11" sm="5">
+        <v-dialog
+          ref="dialog"
+          v-model="modal2"
+          :return-value.sync="time"
+          persistent
+          width="290px"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-text-field
+              v-model="time"
+              label="Picker in dialog"
+              prepend-icon="mdi-clock-time-four-outline"
+              readonly
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </template>
+          <v-time-picker v-if="modal2" v-model="time" full-width>
+            <v-spacer></v-spacer>
+            <v-btn text color="primary" @click="modal2 = false">
+              Cancel
+            </v-btn>
+            <v-btn text color="primary" @click="$refs.dialog.save(time)">
+              OK
+            </v-btn>
+          </v-time-picker>
+        </v-dialog>
+      </v-col>
+    </v-row> -->
   </div>
 </template>
 
@@ -111,40 +206,39 @@ import TimelineItem from "@/components/molecules/TimelineItem";
 export default {
   components: { TimelineItem },
 
-  data() {
-    return {
-      schedules: [
-        {
-          id: 0,
-          time: "12:30pm - 1:30pm",
-          title: "점심 시간",
-          caption: "",
-          participants: [],
-          options: {
-            color: "teal lighten-3",
-            small: true,
-          },
+  data: () => ({
+    schedules: [
+      {
+        id: 0,
+        time: "12:30pm - 1:30pm",
+        title: "점심 시간",
+        caption: "",
+        participants: [],
+        options: {
+          color: "teal lighten-3",
+          small: true,
         },
-        {
-          id: 1,
-          time: "4pm - 4:30pm",
-          title: "데일리미팅",
-          caption: "Online Meeting",
-          participants: [1, 2, 9, 4],
-          options: {
-            color: "pink",
-            small: false,
-          },
-        },
-      ],
-      schedulesToAdd: {
-        color: "",
-        time: "",
-        title: "",
       },
-      showSchedulesToAdd: false,
-    };
-  },
+      {
+        id: 1,
+        time: "4pm - 4:30pm",
+        title: "데일리미팅",
+        caption: "Online Meeting",
+        participants: [1, 2, 9, 4],
+        options: {
+          color: "pink",
+          small: false,
+        },
+      },
+    ],
+    schedulesToAdd: {
+      color: "",
+      timeStart: "",
+      timeEnd: "",
+      title: "",
+    },
+    // showSchedulesToAdd: false,
+  }),
 
   methods: {
     addSchedules() {
@@ -160,6 +254,7 @@ export default {
         },
       };
       this.schedules = [...this.schedules, item];
+      // this.showSchedulesToAdd = true;
     },
   },
 };
