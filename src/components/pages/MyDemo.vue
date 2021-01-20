@@ -5,7 +5,7 @@
       <h3>timeline</h3>
 
       <v-timeline align-top dense>
-        <v-timeline-item color="pink" small>
+        <!-- <v-timeline-item color="pink" small>
           <v-row class="pt-1">
             <v-col cols="3">
               <strong>5pm</strong>
@@ -53,7 +53,7 @@
               <strong>Lunch break</strong>
             </v-col>
           </v-row>
-        </v-timeline-item>
+        </v-timeline-item> -->
 
         <TimelineItem
           v-for="schedule in schedules"
@@ -69,26 +69,38 @@
         <div>
           <label for="color-picker">색상을 선택해주세요</label>
           <v-color-picker
-            id="color-picker"
             hide-canvas
             hide-inputs
-            width="300px"
+            id="color-picker"
+            v-model="schedulesToAdd.color"
           />
         </div>
         <br />
         <div>
           <label for="time-picker">시간을 선택해주세요</label>
-          <v-time-picker id="time-picker" width="300px"></v-time-picker>
+          <v-time-picker
+            dark
+            scrollable
+            id="time-picker"
+            v-model="schedulesToAdd.time"
+          ></v-time-picker>
         </div>
         <br />
         <div>
-          <v-text-field placeholder="어떤 일정인가요?">
-            <v-icon slot="append" color="red">
+          <v-text-field
+            type="text"
+            placeholder="어떤 일정인가요?"
+            v-model="schedulesToAdd.title"
+          >
+            <v-icon @click="addSchedules" slot="append" color="red">
               mdi-plus
             </v-icon></v-text-field
           >
         </div>
       </v-form>
+      <div v-if="showSchedulesToAdd">
+        {{ schedulesToAdd }}
+      </div>
     </div>
   </div>
 </template>
@@ -125,23 +137,29 @@ export default {
           },
         },
       ],
+      schedulesToAdd: {
+        color: "",
+        time: "",
+        title: "",
+      },
+      showSchedulesToAdd: false,
     };
   },
 
-  method: {
-    addSchedules(color, time, title) {
+  methods: {
+    addSchedules() {
       const item = {
-        id: 0,
-        time,
-        title,
+        id: Date.now(),
+        time: this.schedulesToAdd.time,
+        title: this.schedulesToAdd.title,
         caption: "",
         participants: [],
         options: {
-          color,
+          color: this.schedulesToAdd.color,
           small: true,
         },
       };
-      return item;
+      this.schedules = [...this.schedules, item];
     },
   },
 };
