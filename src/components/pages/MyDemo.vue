@@ -64,7 +64,7 @@
       <br />
 
       <v-divider />
-
+      <br />
       <h2>일정 추가 color-picker, time-picker, v-text-field</h2>
       <v-form>
         <div>
@@ -184,19 +184,29 @@
         </v-dialog>
       </v-col>
     </v-row> -->
-
     <br />
+
     <v-divider />
+    <br />
+    <h2>expansion-paner(treeview와 유사)</h2>
+    <br />
     <expansion-panel />
+    <br />
+
+    <snack-bar
+      v-bind:snackbarAttr="snackbar"
+      v-on:closeSnackBar="() => (snackbar.visible = false)"
+    />
   </div>
 </template>
 
 <script>
 import TimelineItem from "@/components/molecules/TimelineItem";
 import ExpansionPanel from "@/components/organisms/ExpansionPanel";
+import SnackBar from "@/components/molecules/SnackBar";
 
 export default {
-  components: { TimelineItem, ExpansionPanel },
+  components: { TimelineItem, ExpansionPanel, SnackBar },
 
   data: () => ({
     schedules: [
@@ -229,7 +239,11 @@ export default {
       timeEnd: "",
       title: "",
     },
-    // showSchedulesToAdd: false,
+    snackbar: {
+      visible: false,
+      text: "일정을 등록했습니다",
+      timeout: 1200,
+    },
   }),
 
   methods: {
@@ -246,7 +260,7 @@ export default {
         },
       };
       this.schedules = [...this.schedules, item];
-      // this.showSchedulesToAdd = true;
+      this.snackbar.visible = true;
     },
   },
 };
