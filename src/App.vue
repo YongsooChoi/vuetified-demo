@@ -25,10 +25,11 @@ export default {
       email: "yongsoochoi@hnine.com",
     },
     menus: [
-      // { id: 0, title: "Profile", path: "profile" },
-      // { id: 1, title: "Post", path: "post" },
-      // { id: 2, title: "Board", path: "board" },
-      { id: 3, title: "Demo", path: "demo" },
+      { id: 0, title: "Main", path: "/" },
+      // { id: 1, title: "Profile", path: "profile" },
+      // { id: 2, title: "Post", path: "post" },
+      // { id: 3, title: "Board", path: "board" },
+      { id: 4, title: "Demo", path: "demo" },
     ],
   }),
 

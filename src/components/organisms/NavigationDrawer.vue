@@ -17,7 +17,7 @@
           </v-list-item-avatar>
         </v-list-item>
 
-        <v-list-item link>
+        <v-list-item link to="/profile">
           <v-list-item-content>
             <v-list-item-title class="title">
               <!-- {{ profile.name_eng }}<br /> -->
