@@ -79,13 +79,28 @@
         <br />
         <div>
           <label for="time-picker">시작 시간을 선택해주세요</label>
-          <v-time-picker
-            landscape
-            scrollable
-            format="24hr"
-            id="time-picker"
-            v-model="schedulesToAdd.timeStart"
-          ></v-time-picker>
+          <v-row id="time-picker" justify="space-around" align="center">
+            <v-col style="width: 350px; flex: 0 1 auto;">
+              <h3>시작:</h3>
+              <v-time-picker
+                landscape
+                scrollable
+                ampm-in-title
+                v-model="schedulesToAdd.timeStart"
+                v-bind:max="schedulesToAdd.timeEnd"
+              ></v-time-picker>
+            </v-col>
+            <v-col style="width: 350px; flex: 0 1 auto;">
+              <h3>종료:</h3>
+              <v-time-picker
+                landscape
+                scrollable
+                ampm-in-title
+                v-model="schedulesToAdd.timeEnd"
+                v-bind:min="schedulesToAdd.timeStart"
+              ></v-time-picker>
+            </v-col>
+          </v-row>
         </div>
 
         <br />
@@ -105,34 +120,6 @@
         {{ schedulesToAdd }}
       </div> -->
     </div>
-
-    <!-- <v-divider />
-    <div>
-      <h1>Plan your event:</h1>
-      <v-row justify="space-around" align="center">
-        <v-col style="width: 350px; flex: 0 1 auto;">
-          <h2>시작:</h2>
-          <v-time-picker
-            landscape
-            scrollable
-            format="24hr"
-            v-model="start"
-            :max="end"
-          ></v-time-picker>
-        </v-col>
-        <v-col style="width: 350px; flex: 0 1 auto;">
-          <h2>종료:</h2>
-          <v-time-picker
-            landscape
-            scrollable
-            format="24hr"
-            v-model="end"
-            :min="start"
-          ></v-time-picker>
-        </v-col>
-      </v-row>
-    </div>
-    <br /> -->
 
     <!-- <v-divider />
     <v-row>
@@ -197,14 +184,19 @@
         </v-dialog>
       </v-col>
     </v-row> -->
+
+    <br />
+    <v-divider />
+    <expansion-panel />
   </div>
 </template>
 
 <script>
 import TimelineItem from "@/components/molecules/TimelineItem";
+import ExpansionPanel from "@/components/organisms/ExpansionPanel";
 
 export default {
-  components: { TimelineItem },
+  components: { TimelineItem, ExpansionPanel },
 
   data: () => ({
     schedules: [
@@ -244,7 +236,7 @@ export default {
     addSchedules() {
       const item = {
         id: Date.now(),
-        time: this.schedulesToAdd.time,
+        time: `${this.schedulesToAdd.timeStart} - ${this.schedulesToAdd.timeEnd}`,
         title: this.schedulesToAdd.title,
         caption: "",
         participants: [],
