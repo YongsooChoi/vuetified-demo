@@ -1,5 +1,5 @@
-import Axios from "axios";
-import * as types from "@/store/mutation-types";
+// import Axios from "axios";
+// import * as types from "@/store/mutation-types";
 
 const state = {
   schedules: [],

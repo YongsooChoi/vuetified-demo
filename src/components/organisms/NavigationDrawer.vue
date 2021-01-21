@@ -20,7 +20,10 @@
           offset-y="20"
         >
           <v-list-item-avatar>
-            <v-img src="https://randomuser.me/api/portraits/men/3.jpg"></v-img>
+            <!-- <v-img src="https://randomuser.me/api/portraits/men/3.jpg"></v-img> -->
+            <v-img
+              src="https://lh3.google.com/u/1/ogw/ADGmqu_eRWSc24afhgLWGhWki3ZB0oPIZypP1Oi0DFs1=s64-c-mo"
+            ></v-img>
           </v-list-item-avatar>
         </v-badge>
       </v-list-item>

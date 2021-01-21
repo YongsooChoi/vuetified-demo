@@ -13,7 +13,7 @@ const mutations = {
 
 const actions = {
   initStore: ({ commit }) => {
-    Axios.get("http://jsonplaceholder.typicode.com/users").then((response) => {
+    Axios.get("https://jsonplaceholder.typicode.com/users").then((response) => {
       commit("SET_STORE", response.data);
     });
   },

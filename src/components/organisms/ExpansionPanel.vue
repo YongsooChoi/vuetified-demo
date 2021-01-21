@@ -1,19 +1,19 @@
 <template>
   <v-expansion-panels focusable>
-    <v-expansion-panel v-for="(item, i) in 5" :key="i">
-      <v-expansion-panel-header>Item</v-expansion-panel-header>
+    <v-expansion-panel v-for="item in lists" :key="item.id">
+      <v-expansion-panel-header>{{ item.title }}</v-expansion-panel-header>
       <v-expansion-panel-content>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
+        {{ item.body }}
       </v-expansion-panel-content>
     </v-expansion-panel>
   </v-expansion-panels>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["lists"],
+  computed: {},
+};
 </script>
 
 <style lang="scss" scoped></style>

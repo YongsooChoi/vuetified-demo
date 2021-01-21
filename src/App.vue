@@ -17,6 +17,7 @@
 <script>
 import NavigationDrawer from "@/components/organisms/NavigationDrawer";
 import SystemBar from "@/components/organisms/SystemBar";
+import * as types from "@/store/mutation-types";
 
 export default {
   name: "App",
@@ -33,8 +34,8 @@ export default {
       { id: 0, title: "Main", path: "/" },
       // { id: 1, title: "Profile", path: "profile" },
       // { id: 2, title: "Post", path: "post" },
-      // { id: 3, title: "Board", path: "board" },
-      { id: 4, title: "Demo", path: "demo" },
+      { id: 3, title: "Board", path: "/board" },
+      { id: 4, title: "Demo", path: "/demo" },
     ],
     showSystemBar: true,
   }),
@@ -54,7 +55,10 @@ export default {
   },
 
   created() {
-    this.$store.dispatch("initStore");
+    // this.$store.dispatch("initStore");
+    this.$store.dispatch(types.FETCH_POSTS);
+    console.dir(this.$route);
+    console.dir(this.$router);
   },
 };
 </script>

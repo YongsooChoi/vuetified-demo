@@ -188,9 +188,16 @@
 
     <v-divider />
     <br />
-    <h2>expansion-paner(treeview와 유사)</h2>
+    <h2>expansion-paner(유사하게 사용할 수 있는 treeview 컴포넌트도 존재)</h2>
     <br />
-    <expansion-panel />
+    <expansion-panel v-bind:lists="posts" />
+    <br />
+
+    <v-divider />
+    <br />
+    <h2>dashboard-card</h2>
+    <br />
+    <dashboard-card />
     <br />
 
     <snack-bar
@@ -204,9 +211,10 @@
 import TimelineItem from "@/components/molecules/TimelineItem";
 import ExpansionPanel from "@/components/organisms/ExpansionPanel";
 import SnackBar from "@/components/molecules/SnackBar";
+import DashboardCard from "@/components/organisms/DashboardCard.vue";
 
 export default {
-  components: { TimelineItem, ExpansionPanel, SnackBar },
+  components: { TimelineItem, ExpansionPanel, SnackBar, DashboardCard },
 
   data: () => ({
     schedules: [
@@ -261,6 +269,12 @@ export default {
       };
       this.schedules = [...this.schedules, item];
       this.snackbar.visible = true;
+    },
+  },
+
+  computed: {
+    posts() {
+      return this.$store.getters.posts;
     },
   },
 };
