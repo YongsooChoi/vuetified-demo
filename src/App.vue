@@ -17,7 +17,7 @@
 <script>
 import NavigationDrawer from "@/components/organisms/NavigationDrawer";
 import SystemBar from "@/components/organisms/SystemBar";
-import * as types from "@/store/mutation-types";
+import * as action_types from "@/store/action-types";
 
 export default {
   name: "App",
@@ -55,10 +55,9 @@ export default {
   },
 
   created() {
+    console.log(this.$route);
     // this.$store.dispatch("initStore");
-    this.$store.dispatch(types.FETCH_POSTS);
-    console.dir(this.$route);
-    console.dir(this.$router);
+    this.$store.dispatch(action_types.FETCH_POSTS);
   },
 };
 </script>

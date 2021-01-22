@@ -1,20 +1,21 @@
 import Axios from "axios";
-import * as types from "@/store/mutation-types";
+import * as mutation_types from "@/store/mutation-types";
+import * as action_types from "@/store/action-types";
 
 const state = {
   users: [],
 };
 
 const mutations = {
-  [types.SET_STORE](state, payload) {
+  [mutation_types.SET_STORE](state, payload) {
     state.users = payload;
   },
 };
 
 const actions = {
-  initStore: ({ commit }) => {
+  [action_types.initStore]({ commit }) {
     Axios.get("https://jsonplaceholder.typicode.com/users").then((response) => {
-      commit("SET_STORE", response.data);
+      commit(mutation_types.SET_STORE, response.data);
     });
   },
 };

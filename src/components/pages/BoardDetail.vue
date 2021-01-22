@@ -1,18 +1,23 @@
 <template>
-  <div>{{ $route.params.id }} 게시물 상세</div>
+  <div>
+    <h2>{{ id }}번 게시물 상세</h2>
+    {{ detail }}
+  </div>
 </template>
 
 <script>
 export default {
-  // created: {}
-  // computed: {
-  //     post() {
-  //         return this.$store.getters.posts.filter(post=> post.id === location.pathname)
-  //     }
-  // }
-  created() {
-    //   const id = location.pathname;
-    // console.dir(this.$route);
+  data() {
+    return {};
+  },
+  computed: {
+    id() {
+      return this.$route.params.id;
+    },
+    detail() {
+      return this.$store.getters.posts.filter((post) => post.id === this.id);
+      // return this.$store.getters.posts;
+    },
   },
 };
 </script>

@@ -30,7 +30,7 @@
       </template>
     </v-simple-table>
     <br />
-    <pagination />
+    <pagination v-bind:page="page" v-bind:totalPage="pageTotal" />
   </div>
 </template>
 
@@ -39,16 +39,26 @@ import pagination from "@/components/molecules/Pagination";
 
 export default {
   components: { pagination },
+  data() {
+    return {
+      page: 1,
+      postPerPage: 10,
+    };
+  },
   props: [],
   methods: {
     moveToDetail(id) {
-      console.log(id);
       this.$router.push({ name: "boardDetail", params: { id } });
     },
   },
   computed: {
     posts() {
       return this.$store.getters.posts;
+    },
+    pageTotal() {
+      return this.posts.length / this.postPerPage === 0
+        ? 1
+        : this.posts.length / this.postPerPage + 1;
     },
   },
   created() {},

@@ -274,7 +274,7 @@ export default {
 
   computed: {
     posts() {
-      return this.$store.getters.posts;
+      return this.$store.getters.posts.slice(0, 7);
     },
   },
 };
