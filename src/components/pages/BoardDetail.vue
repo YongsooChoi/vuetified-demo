@@ -30,8 +30,9 @@ export default {
       return this.$store.getters.posts;
     },
     detail() {
-      return this.posts.filter((post) => post.id === this.id)[0];
-      // return this.$store.getters.posts;
+      return this.posts.filter((post) => {
+        return post.id == parseInt(this.id);
+      })[0];
     },
   },
 };
