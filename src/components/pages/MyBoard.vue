@@ -1,7 +1,30 @@
 <template>
   <div>
     <h1>My Board</h1>
-    <v-simple-table fixed-header>
+
+    <br />
+    <v-divider />
+    <br />
+
+    <div>
+      <v-btn depressed outlined>
+        게시글 작성
+      </v-btn>
+    </div>
+    <br />
+
+    <v-simple-table
+      fixed-header
+      v-bind:headers="headers"
+      v-bind:search="search"
+    >
+      <template v-slot:top>
+        <v-text-field
+          v-model="search"
+          label="Search"
+          class="mx-4"
+        ></v-text-field>
+      </template>
       <template v-slot:default>
         <thead>
           <tr>
@@ -12,7 +35,10 @@
               Title
             </th>
             <th class="text-left">
-              User
+              작성자
+            </th>
+            <th class="text-left">
+              작성일
             </th>
           </tr>
         </thead>
@@ -25,6 +51,7 @@
             <td>{{ post.id }}</td>
             <td>{{ post.title }}</td>
             <td>{{ post.userId }}</td>
+            <td>{{ post.createdDate ? createdDate : "" }}</td>
           </tr>
         </tbody>
       </template>
@@ -41,6 +68,8 @@ export default {
   components: { pagination },
   data() {
     return {
+      search: "",
+      id: "",
       page: 1,
       postPerPage: 10,
     };
@@ -52,6 +81,30 @@ export default {
     },
   },
   computed: {
+    headers() {
+      return [
+        {
+          text: "ID",
+          align: "start",
+          sortable: false,
+          value: "id",
+          filter: (value) => {
+            if (!this.id) return true;
+            return value < parseInt(this.id);
+          },
+        },
+        {
+          text: "제목",
+          value: "title",
+        },
+        {
+          text: "작성자 번호",
+        },
+        {
+          text: "작성일",
+        },
+      ];
+    },
     posts() {
       return this.$store.getters.posts;
     },
