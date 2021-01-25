@@ -1,6 +1,10 @@
 <template>
   <div class="text-center">
-    <v-pagination v-model="page" v-bind:length="totalPages"></v-pagination>
+    <v-pagination
+      v-model="currentPage"
+      v-bind:length="pageTotal"
+      v-on:input="changePage"
+    ></v-pagination>
   </div>
 </template>
 
@@ -8,7 +12,19 @@
 export default {
   props: {
     page: { type: Number, default: 1 },
-    totalPages: { type: Number, default: 1 },
+    pageTotal: { type: Number, default: 1 },
+  },
+
+  data() {
+    return {
+      currentPage: this.page,
+    };
+  },
+
+  methods: {
+    changePage(value) {
+      this.$emit("changePage", value);
+    },
   },
 };
 </script>

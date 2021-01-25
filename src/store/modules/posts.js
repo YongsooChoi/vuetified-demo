@@ -21,7 +21,7 @@ const actions = {
 };
 
 const getters = {
-  posts: (state) => state.posts,
+  posts: (state) => state.posts.reverse(),
 };
 
 export default {

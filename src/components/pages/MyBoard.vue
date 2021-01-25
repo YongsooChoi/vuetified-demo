@@ -57,7 +57,11 @@
       </template>
     </v-simple-table>
     <br />
-    <pagination v-bind:page="page" v-bind:totalPage="pageTotal" />
+    <pagination
+      v-bind:page="page"
+      v-bind:pageTotal="pageTotal"
+      v-on:changePage="changePage"
+    />
   </div>
 </template>
 
@@ -78,6 +82,9 @@ export default {
   methods: {
     moveToDetail(id) {
       this.$router.push({ name: "boardDetail", params: { id } });
+    },
+    changePage(value) {
+      this.page = value;
     },
   },
   computed: {
@@ -106,12 +113,15 @@ export default {
       ];
     },
     posts() {
-      return this.$store.getters.posts;
+      return this.$store.getters.posts.slice(
+        this.postPerPage * (this.page - 1),
+        this.postPerPage * this.page
+      );
     },
     pageTotal() {
-      return this.posts.length / this.postPerPage === 0
+      return this.$store.getters.posts.length / this.postPerPage === 0
         ? 1
-        : this.posts.length / this.postPerPage + 1;
+        : Math.ceil(this.$store.getters.posts.length / this.postPerPage);
     },
   },
   created() {},
