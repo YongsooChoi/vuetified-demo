@@ -4,6 +4,7 @@ import HelloWorld from "@/components/HelloWorld";
 import MyProfile from "@/components/pages/MyProfile";
 import MyBoard from "@/components/pages/MyBoard";
 import BoardDetail from "@/components/pages/BoardDetail";
+import BoardCreate from "@/components/pages/BoardCreate";
 import MyPost from "@/components/pages/MyPost";
 import MyDemo from "@/components/pages/MyDemo";
 
@@ -32,6 +33,11 @@ export default new Router({
       path: "/board",
       name: "board",
       component: MyBoard,
+    },
+    {
+      path: "/board/create",
+      name: "boardCreate",
+      component: BoardCreate,
     },
     {
       path: "/board/:id",

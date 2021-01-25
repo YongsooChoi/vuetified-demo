@@ -7,7 +7,7 @@
     <br />
 
     <div>
-      <v-btn depressed outlined>
+      <v-btn depressed outlined link to="/board/create">
         게시글 작성
       </v-btn>
     </div>
@@ -23,6 +23,9 @@
           v-model="search"
           label="Search"
           class="mx-4"
+          append-icon="mdi-magnify"
+          single-line
+          hide-details
         ></v-text-field>
       </template>
       <template v-slot:default>
