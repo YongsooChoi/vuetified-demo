@@ -5,8 +5,7 @@
     <br />
     <v-divider />
     <br />
-
-    <div>
+    <div class="btn-bar">
       <v-btn depressed outlined link to="/board/create">
         게시글 작성
       </v-btn>
@@ -131,4 +130,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.btn-bar {
+  text-align: end;
+}
+</style>
