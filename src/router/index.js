@@ -5,6 +5,7 @@ import MyProfile from "@/components/pages/MyProfile";
 import MyBoard from "@/components/pages/MyBoard";
 import BoardDetail from "@/components/pages/BoardDetail";
 import BoardCreate from "@/components/pages/BoardCreate";
+import BoardEdit from "@/components/pages/BoardEdit";
 import MyPost from "@/components/pages/MyPost";
 import MyDemo from "@/components/pages/MyDemo";
 
@@ -43,6 +44,11 @@ export default new Router({
       path: "/board/:id",
       name: "boardDetail",
       component: BoardDetail,
+    },
+    {
+      path: "/board/:id/edit",
+      name: "boardEdit",
+      component: BoardEdit,
     },
     {
       path: "/demo",

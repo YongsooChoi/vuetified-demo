@@ -1,6 +1,6 @@
 <template>
   <div>
-    게시물 작성
+    게시물 수정
     <v-text-field
       required
       v-model="form.title"
@@ -25,27 +25,25 @@
       label="Contents"
       placeholder="200자 이내로 작성"
     ></v-textarea>
-    <div>
-      <div style="float: right">
-        <v-btn depressed outlined link style="margin: 10px" to="/board">
-          이전으로
-        </v-btn>
-        <v-btn depressed outlined v-on:click="save">
-          작성 완료
-        </v-btn>
-      </div>
+    <!-- <v-checkbox v-model="form.terms" color="green">
+      <template v-slot:label>
+        <div @click.stop="">
+          Do you accept the
+          <a href="#" @click.prevent="terms = true">terms</a>
+          and
+          <a href="#" @click.prevent="conditions = true">conditions?</a>
+        </div>
+      </template>
+    </v-checkbox> -->
+    <div style="float: right">
+      <!-- <v-btn depressed outlined link style="margin: 10px" to="/board">
+        이전으로
+      </v-btn> -->
+      <v-btn depressed outlined v-on:click="edit">
+        작성 완료
+      </v-btn>
     </div>
     <div>
-      <v-checkbox v-model="form.terms" color="green">
-        <template v-slot:label>
-          <div @click.stop="">
-            Do you accept the
-            <a href="#" @click.prevent="terms = true">terms</a>
-            and
-            <a href="#" @click.prevent="conditions = true">conditions?</a>
-          </div>
-        </template>
-      </v-checkbox>
       <v-dialog v-model="terms" width="70%">
         <v-card>
           <v-card-title class="title">
@@ -79,23 +77,19 @@
         </v-card>
       </v-dialog>
     </div>
+    {{ defaultForm }}
+    {{ form }}
   </div>
 </template>
 
 <script>
-import { CREATE_POST } from "@/store/mutation-types";
+import { UPDATE_POST } from "@/store/mutation-types";
 
 export default {
   data() {
-    const defaultForm = Object.freeze({
-      title: "",
-      contents: "",
-      email: "",
-      terms: false,
-    });
-
     return {
-      form: Object.assign({}, defaultForm),
+      defaultForm: {},
+      form: Object.assign({}, this.defaultForm),
       rules: {
         contents: [(v) => v.length <= 200 || "Max 25 characters"],
         title: [(v) => v.length <= 25 || "Max 25 characters"],
@@ -107,13 +101,37 @@ export default {
     };
   },
 
-  methods: {
-    save() {
-      this.$store.commit(CREATE_POST, this.form);
-      setTimeout(() => {
-        this.$router.push(`/board/${this.$store.getters.id - 1}`);
-      }, 1000); // 서버 응답 데이터의 id 이용하도록 수정 필요
+  computed: {
+    id() {
+      console.log(this.$route.params);
+      return this.$route.params.id;
     },
+    posts() {
+      return this.$store.getters.posts;
+    },
+    detail() {
+      return this.posts.filter((post) => {
+        return post.id == parseInt(this.id);
+      })[0];
+    },
+  },
+
+  methods: {
+    edit() {
+      this.$store.commit(UPDATE_POST, this.form);
+      //   setTimeout(() => {
+      //     this.$router.push(`/board/${this.$store.getters.id - 1}`);
+      //   }, 1000); // 서버 응답 데이터의 id 이용하도록 수정 필요
+    },
+  },
+
+  created() {
+    this.defaultForm = {
+      title: this.detail.title,
+      contents: this.detail.contents,
+      email: this.detail.email,
+      terms: this.detail.terms,
+    };
   },
 };
 </script>

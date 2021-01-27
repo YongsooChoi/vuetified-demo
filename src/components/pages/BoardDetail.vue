@@ -5,9 +5,14 @@
     ><br />
     <br />
     <div class="btn-bar">
-      <!-- <v-btn depressed outlined>
+      <v-btn
+        depressed
+        outlined
+        v-on:click="moveToEditPage"
+        style="margin: 10px"
+      >
         수정
-      </v-btn> -->
+      </v-btn>
       <v-btn depressed outlined v-on:click="deletePost">
         삭제
       </v-btn>
@@ -62,7 +67,7 @@ export default {
       this.$router.push("/board");
     },
     moveToEditPage() {
-      this.$router.push("/board/edit");
+      this.$router.push(`/board/${this.id}/edit`);
     },
   },
 
