@@ -41,7 +41,7 @@ const mutations = {
   [UPDATE_POST](state, payload) {
     state.posts = state.posts.map((post) => {
       if (post.id === payload.id) {
-        post = payload.post;
+        post = { ...post, ...payload.post };
       }
       return post;
     });

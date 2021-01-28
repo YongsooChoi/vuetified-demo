@@ -1,8 +1,9 @@
 <template>
   <div>
-    <h2>{{ detail && detail.title }}</h2>
+    <h1>{{ detail && detail.title }}</h1>
     <span>ID {{ id && id }}</span
     ><br />
+    <span>E-mail {{ detail.email }}</span>
     <br />
     <div class="btn-bar">
       <v-btn
@@ -29,7 +30,7 @@
       </v-row>
     </v-simple-table> -->
     <div>
-      <h3>내용</h3>
+      <h2>내용</h2>
       <br />
       {{ detail && detail.body }}
     </div>

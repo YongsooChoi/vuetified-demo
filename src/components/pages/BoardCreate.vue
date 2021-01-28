@@ -23,7 +23,7 @@
       clearable
       clear-icon="mdi-close-circle"
       label="Contents"
-      placeholder="200자 이내로 작성"
+      placeholder="300자 이내로 작성"
     ></v-textarea>
     <div>
       <div style="float: right">
@@ -97,8 +97,8 @@ export default {
     return {
       form: Object.assign({}, defaultForm),
       rules: {
-        contents: [(v) => v.length <= 200 || "Max 25 characters"],
-        title: [(v) => v.length <= 25 || "Max 25 characters"],
+        title: [(v) => v.length <= 50 || "Max 50 characters"],
+        contents: [(v) => v.length <= 300 || "Max 300 characters"],
       },
       content:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",

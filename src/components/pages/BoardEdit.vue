@@ -5,7 +5,7 @@
       required
       v-model="form.title"
       v-bind:rules="rules.title"
-      counter="25"
+      counter="100"
       hint="Title is required"
       label="Title"
     ></v-text-field>
@@ -16,16 +16,16 @@
     ></v-text-field>
     <v-textarea
       required
-      v-model="form.contents"
-      v-bind:rules="rules.contents"
+      v-model="form.body"
+      v-bind:rules="rules.body"
       counter
       auto-grow
       clearable
       clear-icon="mdi-close-circle"
-      label="Contents"
-      placeholder="200자 이내로 작성"
+      label="Body"
+      placeholder="300자 이내로 작성"
     ></v-textarea>
-    <!-- <v-checkbox v-model="form.terms" color="green">
+    <v-checkbox v-model="form.terms" color="green">
       <template v-slot:label>
         <div @click.stop="">
           Do you accept the
@@ -34,7 +34,7 @@
           <a href="#" @click.prevent="conditions = true">conditions?</a>
         </div>
       </template>
-    </v-checkbox> -->
+    </v-checkbox>
     <div style="float: right">
       <!-- <v-btn depressed outlined link style="margin: 10px" to="/board">
         이전으로
@@ -77,8 +77,6 @@
         </v-card>
       </v-dialog>
     </div>
-    {{ defaultForm }}
-    {{ form }}
   </div>
 </template>
 
@@ -88,11 +86,15 @@ import { UPDATE_POST } from "@/store/mutation-types";
 export default {
   data() {
     return {
-      defaultForm: {},
-      form: Object.assign({}, this.defaultForm),
+      form: {
+        title: "",
+        body: "",
+        email: "",
+        terms: false,
+      },
       rules: {
-        contents: [(v) => v.length <= 200 || "Max 25 characters"],
-        title: [(v) => v.length <= 25 || "Max 25 characters"],
+        title: [(v) => v.length <= 100 || "Max 100 characters"],
+        body: [(v) => v.length <= 300 || "Max 300 characters"],
       },
       content:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
@@ -103,7 +105,6 @@ export default {
 
   computed: {
     id() {
-      console.log(this.$route.params);
       return this.$route.params.id;
     },
     posts() {
@@ -118,17 +119,20 @@ export default {
 
   methods: {
     edit() {
-      this.$store.commit(UPDATE_POST, this.form);
+      this.$store.commit(UPDATE_POST, {
+        id: parseInt(this.id),
+        post: this.form,
+      });
       //   setTimeout(() => {
-      //     this.$router.push(`/board/${this.$store.getters.id - 1}`);
+      this.$router.push(`/board`);
       //   }, 1000); // 서버 응답 데이터의 id 이용하도록 수정 필요
     },
   },
-
   created() {
-    this.defaultForm = {
+    this.form = {
+      ...this.form,
       title: this.detail.title,
-      contents: this.detail.contents,
+      body: this.detail.body,
       email: this.detail.email,
       terms: this.detail.terms,
     };
